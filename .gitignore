@@ -1,0 +1,8 @@
+## 主档案
+main.js
+## 配置档
+.env
+package-lock.json
+package.json
+## Discord 依赖项
+node_modules
