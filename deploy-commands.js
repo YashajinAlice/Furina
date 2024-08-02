@@ -19,7 +19,11 @@ const loadCommands = (dir) => {
     }
 };
 
+// 加載所有指令
 loadCommands(commandsPath);
+
+// 顯示已註冊的指令數量
+console.log(`已註冊 ${commands.length} 個指令。`);
 
 const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 
