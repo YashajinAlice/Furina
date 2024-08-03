@@ -24,6 +24,25 @@ const CountingSettings = sequelize.define('CountingSettings', {
     }
 });
 
-sequelize.sync({ alter: true }); // 使用 alter 选项来更新现有表结构
+const Warnings = sequelize.define('Warnings', {
+    userId: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    reason: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
+    warnedBy: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    timestamp: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW
+    }
+});
 
-module.exports = { CountingSettings };
+sequelize.sync({ alter: true });
+
+module.exports = { CountingSettings, Warnings };
