@@ -1,7 +1,8 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = new Sequelize({
     dialect: 'sqlite',
-    storage: 'database.sqlite'
+    storage: 'database.sqlite',
+    logging: false // 禁止日誌輸出
 });
 
 const CountingSettings = sequelize.define('CountingSettings', {
@@ -43,6 +44,19 @@ const Warnings = sequelize.define('Warnings', {
     }
 });
 
-sequelize.sync({ alter: true });
+const AnnouncementSettings = sequelize.define('AnnouncementSettings', {
+    guildId: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        primaryKey: true
+    },
+    announcementChannelId: {
+        type: DataTypes.STRING,
+        allowNull: false
+    }
+});
 
-module.exports = { CountingSettings, Warnings };
+sequelize.sync({ alter: true })
+    .catch(error => console.error('同步資料庫時出現錯誤:', error));
+
+module.exports = { CountingSettings, Warnings, AnnouncementSettings };
